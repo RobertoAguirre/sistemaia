@@ -1,6 +1,11 @@
 import { PUBLIC_API_URL } from '$env/static/public';
 import { getToken } from './stores';
 
+/**
+ * Base del backend.
+ * - Vercel (mismo dominio + rewrite /api → servicio api): deja PUBLIC_API_URL vacío → `/api/...`
+ * - Dev local con API en otro puerto: PUBLIC_API_URL=http://localhost:3001
+ */
 const BASE = (PUBLIC_API_URL || '').replace(/\/$/, '');
 
 export class ApiError extends Error {

@@ -1,4 +1,27 @@
-# Monorepo en Vercel:
-# - apps/web  -> proyecto SvelteKit (frontend)
-# - apps/api  -> funciones serverless de la API (ver apps/api/vercel.json)
-# Configura cada app como proyecto separado en Vercel apuntando a su carpeta.
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "services": {
+    "api": {
+      "root": "apps/api",
+      "framework": "express"
+    },
+    "web": {
+      "root": "apps/web",
+      "framework": "sveltekit-1"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": {
+        "service": "api"
+      }
+    },
+    {
+      "source": "/(.*)",
+      "destination": {
+        "service": "web"
+      }
+    }
+  ]
+}

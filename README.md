@@ -51,11 +51,18 @@ El login/registro con Google usa **Supabase Auth**:
 
 El middleware `requireAuth` acepta tanto el JWT propio como access tokens de Supabase, así la app móvil podrá autenticarse directo con Supabase si lo prefieres.
 
-## Deploy en Vercel
+## Deploy en Vercel (Services)
 
-Crea **dos proyectos** en Vercel (o un monorepo con dos apps):
+Un solo proyecto Vercel con dos servicios (`vercel.json` en la raíz):
 
-1. **API**: Root Directory = `apps/api`. Las funciones en `apps/api/api/` se despliegan como serverless. Configura las env vars del `.env` en el dashboard de Vercel.
-2. **Web**: Root Directory = `apps/web`. Define `PUBLIC_API_URL` apuntando a la URL del proyecto API.
+| Servicio | Root | Público |
+|---|---|---|
+| `api` | `apps/api` (Express) | sí, bajo `/api/*` |
+| `web` | `apps/web` (SvelteKit) | sí, bajo `/*` |
 
-> La app móvil queda pendiente: el endpoint `/api/eventos/check-in` ya acepta `{lat, lng, precision_metros, dispositivo, tipo}` listo para consumirse desde cualquier cliente.
+1. Conecta el repo a Vercel (root del monorepo, no una subcarpeta).
+2. Configura en el proyecto las env vars del `.env` (Supabase, JWT, etc.).
+3. **No** definas `PUBLIC_API_URL` en Vercel: el front llama same-origin `/api/...` y el rewrite lo manda al servicio `api`.
+4. Local unificado: `vercel dev` (o `vercel dev --local`).
+
+> La app móvil puede consumir la misma URL pública `/api/...`. El endpoint `/api/eventos/check-in` acepta `{lat, lng, precision_metros, dispositivo, tipo}`.
