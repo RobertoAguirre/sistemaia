@@ -24,11 +24,11 @@ class VelocimetroApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,
-        scaffoldBackgroundColor: const Color(0xFF0B1220),
+        scaffoldBackgroundColor: const Color(0xFF07140C),
         colorScheme: const ColorScheme.dark(
-          primary: Color(0xFF3DDC97),
-          secondary: Color(0xFF4EA8DE),
-          surface: Color(0xFF121A2B),
+          primary: Color(0xFF009A49),
+          secondary: Color(0xFF2DBE6C),
+          surface: Color(0xFF0F2418),
         ),
         useMaterial3: true,
       ),
@@ -262,7 +262,7 @@ class _VelocimetroPageState extends State<VelocimetroPage> {
                   style: FilledButton.styleFrom(
                     backgroundColor:
                         _midiendo ? Colors.redAccent : color.primary,
-                    foregroundColor: Colors.black,
+                    foregroundColor: Colors.white,
                   ),
                   child: Text(
                     _midiendo ? 'Detener' : 'Iniciar GPS',
@@ -307,7 +307,7 @@ class _InfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: const Color(0xFF121A2B),
+      color: const Color(0xFF0F2418),
       borderRadius: BorderRadius.circular(14),
       child: InkWell(
         onTap: onTap,
@@ -374,7 +374,7 @@ class VelocimetroPainter extends CustomPainter {
     final radio = size.shortestSide * 0.42;
 
     final fondo = Paint()
-      ..color = const Color(0xFF182338)
+      ..color = const Color(0xFF1A3D2A)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 18
       ..strokeCap = StrokeCap.round;
@@ -433,7 +433,7 @@ class VelocimetroPainter extends CustomPainter {
 
     canvas.drawLine(centro, punta, aguja);
     canvas.drawCircle(centro, 8, Paint()..color = colorAguja);
-    canvas.drawCircle(centro, 3.5, Paint()..color = const Color(0xFF0B1220));
+    canvas.drawCircle(centro, 3.5, Paint()..color = const Color(0xFF07140C));
   }
 
   @override
