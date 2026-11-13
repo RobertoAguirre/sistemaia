@@ -61,8 +61,8 @@ Un solo proyecto Vercel con dos servicios (`vercel.json` en la raíz):
 | `web` | `apps/web` (SvelteKit) | sí, bajo `/*` |
 
 1. Conecta el repo a Vercel (root del monorepo, no una subcarpeta).
-2. Configura en el proyecto las env vars del `.env` (Supabase, JWT, etc.).
-3. **No** definas `PUBLIC_API_URL` en Vercel: el front llama same-origin `/api/...` y el rewrite lo manda al servicio `api`.
-4. Local unificado: `vercel dev` (o `vercel dev --local`).
+2. Configura en el proyecto las env vars del `.env` (Supabase, JWT, `PUBLIC_SUPABASE_*`, etc.).
+3. **Elimina** `PUBLIC_API_URL` si existe en Vercel: el front siempre usa `/api/...` del mismo dominio.
+4. Redeploy tras cambiar env vars.
 
 > La app móvil puede consumir la misma URL pública `/api/...`. El endpoint `/api/eventos/check-in` acepta `{lat, lng, precision_metros, dispositivo, tipo}`.
